@@ -7,11 +7,6 @@
         <item name="buttonStyle">@style/AppTheme.Button</item>
     </style>
 
-    <style name="AppTheme.Toolbar" parent="AppTheme">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
 
     </style>
