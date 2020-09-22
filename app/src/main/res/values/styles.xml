@@ -15,6 +15,6 @@
     </style>
 
     <style name="AppTheme.ToolbarStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:background">#200</item>
+        <item name="titleTextAppearance">@android:style/TextAppearance.Material.Widget.Toolbar.Title</item>
     </style>
 </resources>
