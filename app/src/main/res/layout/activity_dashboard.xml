@@ -27,24 +27,28 @@
             android:id="@+id/btnEssencial"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
             android:text="Essencial" />
 
         <Button
             android:id="@+id/btnFrontend"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
             android:text="Front-End" />
 
         <Button
             android:id="@+id/btnBackend"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
             android:text="Back-End" />
 
         <Button
             android:id="@+id/btnDevops"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
             android:text="DevOps" />
     </LinearLayout>
 
