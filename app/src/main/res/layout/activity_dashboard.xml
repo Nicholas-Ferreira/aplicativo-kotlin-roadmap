@@ -1,56 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/backgroundColor"
-    tools:context=".DashboardActivity">
-    <include layout="@layout/toolbar" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="invisible"/>
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:background="@color/backgroundColor"
+        tools:context=".ui.DashboardActivity">
+        <include layout="@layout/toolbar" />
 
-        <Button
-            android:id="@+id/btnEssencial"
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginBottom="20dp"
-            android:text="Essencial" />
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="invisible"/>
 
-        <Button
-            android:id="@+id/btnFrontend"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginBottom="20dp"
-            android:text="Front-End" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="15dp">
 
-        <Button
-            android:id="@+id/btnBackend"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginBottom="20dp"
-            android:text="Back-End" />
+            <Button
+                android:id="@+id/btnEssencial"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:text="Essencial" />
 
-        <Button
-            android:id="@+id/btnDevops"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginBottom="20dp"
-            android:text="DevOps" />
+            <Button
+                android:id="@+id/btnFrontend"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:text="Front-End" />
+
+            <Button
+                android:id="@+id/btnBackend"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:text="Back-End" />
+
+            <Button
+                android:id="@+id/btnDevops"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:text="DevOps" />
+        </LinearLayout>
     </LinearLayout>
 
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/drawer_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/menu_drawer"/>
 
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

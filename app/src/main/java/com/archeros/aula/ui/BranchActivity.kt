@@ -1,8 +1,9 @@
-package com.archeros.aula
+package com.archeros.aula.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import com.archeros.aula.R
 import kotlinx.android.synthetic.main.toolbar.*
 
 class BranchActivity : AppCompatActivity() {

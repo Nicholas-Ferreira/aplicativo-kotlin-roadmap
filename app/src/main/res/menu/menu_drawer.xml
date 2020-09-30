@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_roadmap"
+        android:icon="@drawable/ic_disciplina_white"
+        android:title="@string/nav_roadmap"
+        android:checked="true"/>
+    <item
+        android:id="@+id/nav_favoritos"
+        android:icon="@drawable/ic_baseline_star_white"
+        android:title="@string/nav_favoritos"/>
+</menu>

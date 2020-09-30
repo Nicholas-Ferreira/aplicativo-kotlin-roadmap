@@ -1,10 +1,12 @@
-package com.archeros.aula
+package com.archeros.aula.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.archeros.aula.DebugActivity
+import com.archeros.aula.R
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.json.responseJson
 import kotlinx.android.synthetic.main.activity_login.*

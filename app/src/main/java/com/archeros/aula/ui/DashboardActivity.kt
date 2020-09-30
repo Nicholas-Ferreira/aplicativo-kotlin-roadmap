@@ -1,20 +1,24 @@
-package com.archeros.aula
+package com.archeros.aula.ui
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.GravityCompat
+import com.archeros.aula.DebugActivity
+import com.archeros.aula.NavigationDrawer
+import com.archeros.aula.R
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.toolbar.*
 
-class DashboardActivity : DebugActivity() {
+class DashboardActivity : NavigationDrawer() {
     private val context: Context get() = this
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,5 +82,14 @@ class DashboardActivity : DebugActivity() {
         var intent = Intent(this, BranchActivity::class.java)
         intent.putExtra("branch", branch)
         startActivity(intent)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.nav_roadmap -> null
+            R.id.nav_favoritos -> null
+        }
+        drawer.closeDrawer(GravityCompat.START)
+        return true
     }
 }
