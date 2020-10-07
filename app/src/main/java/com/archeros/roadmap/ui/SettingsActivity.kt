@@ -1,15 +1,9 @@
-package com.archeros.aula
+package com.archeros.roadmap.ui
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
-import androidx.appcompat.widget.SearchView
-import kotlinx.android.synthetic.main.activity_dashboard.*
+import com.archeros.roadmap.R
 import kotlinx.android.synthetic.main.toolbar.*
 
 class SettingsActivity : AppCompatActivity() {

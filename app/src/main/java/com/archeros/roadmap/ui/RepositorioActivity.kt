@@ -1,18 +1,19 @@
-package com.archeros.aula
+package com.archeros.roadmap.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import com.archeros.roadmap.R
+import com.archeros.roadmap.entity.Repositorio
 import kotlinx.android.synthetic.main.toolbar.*
 
-class BranchActivity : AppCompatActivity() {
+class RepositorioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_branch)
+        setContentView(R.layout.activity_repositorio)
         setSupportActionBar(toolbar_view)
-        val args = intent.extras
-        val branchName = args?.getString("branch")
-        supportActionBar?.title = branchName
+        val repositorio = intent.getSerializableExtra("repositorio") as Repositorio
+        supportActionBar?.title = repositorio.nome
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

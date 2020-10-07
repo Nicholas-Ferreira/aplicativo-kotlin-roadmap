@@ -1,4 +1,4 @@
-package com.archeros.aula
+package com.archeros.roadmap
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
