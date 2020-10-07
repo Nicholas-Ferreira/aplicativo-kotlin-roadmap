@@ -1,9 +1,9 @@
-package com.archeros.aula.ui
+package com.archeros.roadmap.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import com.archeros.aula.R
+import com.archeros.roadmap.R
 import kotlinx.android.synthetic.main.toolbar.*
 
 class SettingsActivity : AppCompatActivity() {

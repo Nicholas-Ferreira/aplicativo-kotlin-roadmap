@@ -1,7 +1,7 @@
-package com.archeros.aula.service
+package com.archeros.roadmap.service
 
 import android.content.Context
-import com.archeros.aula.entity.Repositorio
+import com.archeros.roadmap.entity.Repositorio
 
 object RepositorioService {
 

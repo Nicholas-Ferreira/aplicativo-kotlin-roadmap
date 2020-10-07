@@ -1,4 +1,4 @@
-package com.archeros.aula.entity;
+package com.archeros.roadmap.entity;
 import java.io.Serializable;
 
 class Repositorio : Serializable {

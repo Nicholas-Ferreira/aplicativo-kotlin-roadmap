@@ -1,4 +1,4 @@
-package com.archeros.aula.ui
+package com.archeros.roadmap.ui
 
 import android.content.Context
 import android.content.Intent
@@ -12,11 +12,11 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.archeros.aula.NavigationDrawer
-import com.archeros.aula.R
-import com.archeros.aula.adapter.RepositoriosAdapter
-import com.archeros.aula.entity.Repositorio
-import com.archeros.aula.service.RepositorioService
+import com.archeros.roadmap.NavigationDrawer
+import com.archeros.roadmap.R
+import com.archeros.roadmap.adapter.RepositoriosAdapter
+import com.archeros.roadmap.entity.Repositorio
+import com.archeros.roadmap.service.RepositorioService
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.toolbar.*
 

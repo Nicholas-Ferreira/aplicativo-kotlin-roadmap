@@ -1,4 +1,4 @@
-package com.archeros.aula.adapter
+package com.archeros.roadmap.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.archeros.aula.R
-import com.archeros.aula.entity.Repositorio
+import com.archeros.roadmap.R
+import com.archeros.roadmap.entity.Repositorio
 import com.squareup.picasso.Picasso
 
 class RepositoriosAdapter (

@@ -1,10 +1,10 @@
-package com.archeros.aula.ui
+package com.archeros.roadmap.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import com.archeros.aula.R
-import com.archeros.aula.entity.Repositorio
+import com.archeros.roadmap.R
+import com.archeros.roadmap.entity.Repositorio
 import kotlinx.android.synthetic.main.toolbar.*
 
 class RepositorioActivity : AppCompatActivity() {
