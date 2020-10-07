@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer"
+    android:id="@+id/drawer_dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -23,49 +23,25 @@
             android:indeterminate="true"
             android:visibility="invisible"/>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="15dp">
 
-            <Button
-                android:id="@+id/btnEssencial"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyclerViewRepositorios"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="20dp"
-                android:text="Essencial" />
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:scrollbarStyle="outsideOverlay"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/adapter_repositorio"
+                />
 
-            <Button
-                android:id="@+id/btnFrontend"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="20dp"
-                android:text="Front-End" />
-
-            <Button
-                android:id="@+id/btnBackend"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="20dp"
-                android:text="Back-End" />
-
-            <Button
-                android:id="@+id/btnDevops"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="20dp"
-                android:text="DevOps" />
-        </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/drawer_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/menu_drawer"/>
+    <include layout="@layout/drawer_navigation" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
