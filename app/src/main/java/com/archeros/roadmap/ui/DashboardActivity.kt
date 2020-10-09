@@ -19,11 +19,14 @@ import com.archeros.roadmap.entity.Repositorio
 import com.archeros.roadmap.service.RepositorioService
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.drawer_header.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class DashboardActivity : NavigationDrawer() {
+    private val TAG = "Dashboard"
     private val context: Context get() = this
     private var repositios = listOf<Repositorio>()
+    private var firebaseAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,8 @@ class DashboardActivity : NavigationDrawer() {
         RecyclerViewRepositorios?.itemAnimator = DefaultItemAnimator()
         RecyclerViewRepositorios?.setHasFixedSize(true)
         supportActionBar?.title = getString(R.string.title_dashboard)
+        firebaseAuth = FirebaseAuth.getInstance();
+
 
         //btnEssencial.setOnClickListener { openBranchActivity("Essencial") }
         //btnFrontend.setOnClickListener { openBranchActivity("Front-End") }
@@ -43,6 +48,11 @@ class DashboardActivity : NavigationDrawer() {
 
     override fun onResume() {
         super.onResume()
+        val user = firebaseAuth?.currentUser
+        Log.i(TAG, user?.email.toString())
+        if (user != null) {
+            setUserName(user.displayName.toString())
+        }
         this.taskRepositorios()
     }
 
