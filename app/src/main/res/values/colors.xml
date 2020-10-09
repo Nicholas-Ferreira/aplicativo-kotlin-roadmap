@@ -4,5 +4,6 @@
     <color name="colorSecondary">#027afb</color>
     <color name="backgroundColor">#202328</color>
     <color name="colorButton">#4ecca3</color>
+    <color name="colorButtonDark">#333333</color>
     <color name="colorAccent">#EEEEEE</color>
 </resources>

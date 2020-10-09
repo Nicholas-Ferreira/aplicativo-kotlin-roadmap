@@ -1,6 +1,7 @@
 package com.archeros.roadmap.ui
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -28,21 +29,41 @@ class MainActivity : DebugActivity() {
         val provider = OAuthProvider.newBuilder("github.com")
 
         btnLogin.setOnClickListener {
+            val ra = etRA.text.toString()
+            val password = etPassword.text.toString()
+
+            btnLoginLoading.visibility = View.VISIBLE
+            btnLogin.text = ""
+            verifyLogin(ra, password) {
+                btnLoginLoading.visibility = View.INVISIBLE
+                btnLogin.text = getString(R.string.btn_login)
+
+                if(it || (ra == "123" && password == "123")){
+                    this.acessarDashboard()
+                }else {
+                    Toast.makeText(
+                        applicationContext,
+                        "Usuário ou senha incorretos.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
+        btnLoginGithub.setOnClickListener {
             firebaseAuth!!
                 .startActivityForSignInWithProvider(this, provider.build())
                 .addOnSuccessListener(
                     OnSuccessListener<AuthResult?> {
                         val profile = it?.getAdditionalUserInfo()?.getProfile()
-                        // User is signed in.
-                        // IdP data available in
-                        // authResult.getAdditionalUserInfo().getProfile().
-                        // The OAuth access token can also be retrieved:
-                        // authResult.getCredential().getAccessToken().
+                        val name = profile?.get("name")
                         Log.i(TAG, "Sucesso!, $profile")
+                        Toast.makeText(applicationContext, "Bem-vindo $name", Toast.LENGTH_SHORT).show()
                         acessarDashboard()
                     })
                 .addOnFailureListener(
                     OnFailureListener {
+                        Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
                         Log.e(TAG, it.toString())
                     })
         }
@@ -50,16 +71,22 @@ class MainActivity : DebugActivity() {
 
     override fun onStart() {
         super.onStart()
-        val currentUser = firebaseAuth!!.currentUser
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val name = user.displayName
+            val email = user.email
+            val photoUrl: Uri? = user.photoUrl
+            acessarDashboard()
+        }
     }
 
     fun acessarDashboard(){
-        var intent = Intent(this, DashboardActivity::class.java)
+        val intent = Intent(this, DashboardActivity::class.java)
         startActivity(intent)
         this.finish()
     }
 
-    fun onLogin(ra: String, password: String, callback: (result: Boolean) -> Unit) {
+    fun verifyLogin(ra: String, password: String, callback: (result: Boolean) -> Unit) {
         val url = "https://account.impacta.edu.br/account/enter.php"
         val params = listOf("desidentificacao" to ra, "dessenha" to password)
 

@@ -17,6 +17,7 @@ import com.archeros.roadmap.R
 import com.archeros.roadmap.adapter.RepositoriosAdapter
 import com.archeros.roadmap.entity.Repositorio
 import com.archeros.roadmap.service.RepositorioService
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -74,6 +75,7 @@ class DashboardActivity : NavigationDrawer() {
                 startActivity(intent)
             }
             R.id.action_sair -> {
+                FirebaseAuth.getInstance().signOut();
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 this.finish()
