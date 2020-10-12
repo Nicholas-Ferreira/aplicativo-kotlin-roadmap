@@ -48,12 +48,7 @@ class DashboardActivity : NavigationDrawer() {
 
     override fun onResume() {
         super.onResume()
-        val user = firebaseAuth?.currentUser
-        Log.i(TAG, user?.email.toString())
-        if (user != null) {
-            setUserName(user.displayName.toString())
-        }
-        this.taskRepositorios()
+        this.getRepositorios()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -84,12 +79,7 @@ class DashboardActivity : NavigationDrawer() {
                 var intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
             }
-            R.id.action_sair -> {
-                FirebaseAuth.getInstance().signOut();
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                this.finish()
-            }
+            R.id.action_sair -> logoutApplication()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -112,15 +102,29 @@ class DashboardActivity : NavigationDrawer() {
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
-            R.id.nav_roadmap -> null
-            R.id.nav_favoritos -> null
+            R.id.nav_roadmap -> getRepositorios()
+            R.id.nav_favoritos -> getFavoritos()
+            R.id.nav_sair -> logoutApplication()
         }
         drawer_dashboard.closeDrawer(GravityCompat.START)
         return true
     }
 
-    fun taskRepositorios() {
+    fun getRepositorios() {
+        supportActionBar?.title = getString(R.string.title_dashboard)
         this.repositios = RepositorioService.getDisciplinas(context)
         RecyclerViewRepositorios?.adapter = RepositoriosAdapter(repositios) {openRepositorioActivity(it)}
+    }
+
+    fun getFavoritos() {
+        supportActionBar?.title = "Favoritos"
+        RecyclerViewRepositorios?.adapter = null
+    }
+
+    fun logoutApplication() {
+        FirebaseAuth.getInstance().signOut();
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        this.finish()
     }
 }
