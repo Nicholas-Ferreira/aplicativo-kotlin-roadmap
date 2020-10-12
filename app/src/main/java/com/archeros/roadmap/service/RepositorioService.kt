@@ -9,8 +9,8 @@ object RepositorioService {
         val repositorios = mutableListOf<Repositorio>()
 
         val r1 = Repositorio()
-        r1.nome = "Essencial"
-        r1.foto = "https://cdn.pixabay.com/photo/2018/01/18/20/42/pencil-3091204_1280.jpg"
+        r1.nome = "Fundamental"
+        r1.foto = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Closed_Book_Icon.svg/1200px-Closed_Book_Icon.svg.png"
         repositorios.add(r1)
 
         val r2 = Repositorio()
