@@ -94,7 +94,6 @@ class DashboardActivity : NavigationDrawer() {
     }
 
     fun openRepositorioActivity(repositorio: Repositorio) {
-        Toast.makeText(context, "Clicou repositrio ${repositorio.nome}", Toast.LENGTH_SHORT).show()
         var intent = Intent(this, RepositorioActivity::class.java)
         intent.putExtra("repositorio", repositorio)
         startActivity(intent)

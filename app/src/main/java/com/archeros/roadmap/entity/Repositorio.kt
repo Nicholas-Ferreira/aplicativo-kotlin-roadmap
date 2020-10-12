@@ -3,10 +3,10 @@ import java.io.Serializable;
 
 class Repositorio : Serializable {
     var id:Long = 0
-    var nome = ""
-    var foto = ""
+    var name = ""
+    var photo = ""
 
     override fun toString(): String {
-        return "Repositorio(nome='$nome')"
+        return "Repositorio(name='$name')"
     }
 }

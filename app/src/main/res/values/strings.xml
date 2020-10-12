@@ -36,4 +36,5 @@
     <!-- Screens -->
     <string name="btn_login_github">Entrar com GitHub</string>
     <string name="repositorio">Repositório</string>
+    <string name="branch">Branch</string>
 </resources>

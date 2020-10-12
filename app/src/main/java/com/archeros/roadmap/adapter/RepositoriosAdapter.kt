@@ -47,11 +47,11 @@ class RepositoriosAdapter(
         val repositorio = repositorios[position]
 
         // atualizar dados de disciplina
-        holder.nome.text = repositorio.nome
+        holder.nome.text = repositorio.name
         holder.loader.visibility = View.VISIBLE
 
         // download da imagem
-        Picasso.with(context).load(repositorio.foto).transform(RoundedCornersTransform()).fit().into(
+        Picasso.with(context).load(repositorio.photo).transform(RoundedCornersTransform()).fit().into(
             holder.image,
             object : com.squareup.picasso.Callback {
                 override fun onSuccess() {
