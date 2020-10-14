@@ -20,19 +20,16 @@ import kotlinx.android.synthetic.main.toolbar.*
 class RepositorioActivity : AppCompatActivity() {
     private val context: Context get() = this
     private var branches = listOf<Branch>()
+    private var repository: Repositorio? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repositorio)
         setSupportActionBar(toolbar_view)
-        val repositorio = intent.getSerializableExtra("repositorio") as Repositorio
-        supportActionBar?.title = repositorio.name
+        repository = intent.getSerializableExtra("repositorio") as Repositorio
+        supportActionBar?.title = repository!!.name
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        val fundamental_id: Long = 1
-        if(repositorio.id == fundamental_id){
-            this.getDisciplinas()
-        }
+        getBranches()
     }
 
     override fun onResume() {
@@ -46,9 +43,13 @@ class RepositorioActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun getDisciplinas() {
-        this.branches = BranchService.getFundamental(context)
-        RecyclerViewBranches?.adapter = BranchAdapter(branches) {openLearnActivity(it)}
+    fun getBranches() {
+        Thread {
+            this.branches = BranchService.getBranchByRepository(repository!!)
+            runOnUiThread {
+                RecyclerViewBranches?.adapter = BranchAdapter(branches) {openLearnActivity(it)}
+            }
+        }.start()
     }
 
     fun openLearnActivity(branch: Branch) {

@@ -111,8 +111,14 @@ class DashboardActivity : NavigationDrawer() {
 
     fun getRepositorios() {
         supportActionBar?.title = getString(R.string.title_dashboard)
-        this.repositios = RepositorioService.getDisciplinas(context)
-        RecyclerViewRepositorios?.adapter = RepositoriosAdapter(repositios) {openRepositorioActivity(it)}
+        progressBar.visibility = View.VISIBLE
+        Thread {
+            this.repositios = RepositorioService.getRepositories()
+            runOnUiThread {
+                RecyclerViewRepositorios?.adapter = RepositoriosAdapter(repositios) {openRepositorioActivity(it)}
+                progressBar.visibility = View.INVISIBLE
+            }
+        }.start()
     }
 
     fun getFavoritos() {
