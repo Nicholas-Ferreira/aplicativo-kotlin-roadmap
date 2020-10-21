@@ -55,6 +55,13 @@
         android:inputType="textPassword"
         android:backgroundTint="@color/colorAccent"/>
 
+    <CheckBox
+        android:id="@+id/cbRemember"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="@string/cb_lembrar" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

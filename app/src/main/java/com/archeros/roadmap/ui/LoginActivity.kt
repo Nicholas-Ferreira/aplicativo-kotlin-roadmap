@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import com.archeros.roadmap.DebugActivity
 import com.archeros.roadmap.R
+import com.archeros.roadmap.core.MyPreferences
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.json.responseJson
 import com.google.android.gms.tasks.OnFailureListener
@@ -18,7 +19,7 @@ import com.google.firebase.auth.OAuthProvider
 import kotlinx.android.synthetic.main.activity_login.*
 
 
-class MainActivity : DebugActivity() {
+class LoginActivity : DebugActivity() {
     private val TAG = "MainActivity"
     private var firebaseAuth: FirebaseAuth? = null
 
@@ -26,11 +27,15 @@ class MainActivity : DebugActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         firebaseAuth = FirebaseAuth.getInstance();
-        val provider = OAuthProvider.newBuilder("github.com")
+
+        etRA.setText(MyPreferences.getString("ra"))
+        etPassword.setText(MyPreferences.getString("password"))
+        cbRemember.isChecked = MyPreferences.getBoolean("remember")
 
         btnLogin.setOnClickListener {
             val ra = etRA.text.toString()
             val password = etPassword.text.toString()
+            val remember = cbRemember.isChecked
 
             btnLoginLoading.visibility = View.VISIBLE
             btnLogin.text = ""
@@ -38,7 +43,17 @@ class MainActivity : DebugActivity() {
                 btnLoginLoading.visibility = View.INVISIBLE
                 btnLogin.text = getString(R.string.btn_login)
 
-                if(it || (ra == "123" && password == "123")){
+                if(it || (ra == "123" && password == "123")) {
+                    if(remember) {
+                        MyPreferences.setBoolean("remember", true)
+                        MyPreferences.setString("ra", ra)
+                        MyPreferences.setString("password", password)
+                    } else {
+                        MyPreferences.setBoolean("remember", false)
+                        MyPreferences.setString("ra", "")
+                        MyPreferences.setString("password", "")
+                    }
+
                     this.acessarDashboard()
                 }else {
                     Toast.makeText(
@@ -50,27 +65,12 @@ class MainActivity : DebugActivity() {
             }
         }
 
-        btnLoginGithub.setOnClickListener {
-            firebaseAuth!!
-                .startActivityForSignInWithProvider(this, provider.build())
-                .addOnSuccessListener(
-                    OnSuccessListener<AuthResult?> {
-                        val profile = it?.getAdditionalUserInfo()?.getProfile()
-                        val name = profile?.get("name")
-                        Log.i(TAG, "Sucesso!, $profile")
-                        Toast.makeText(applicationContext, "Bem-vindo $name", Toast.LENGTH_SHORT).show()
-                        acessarDashboard()
-                    })
-                .addOnFailureListener(
-                    OnFailureListener {
-                        Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
-                        Log.e(TAG, it.toString())
-                    })
-        }
+        btnLoginGithub.setOnClickListener { githubLogin (it) }
     }
 
     override fun onStart() {
         super.onStart()
+
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
             val name = user.displayName
@@ -100,5 +100,25 @@ class MainActivity : DebugActivity() {
                     Log.i("RequestResult", error.toString())
                 })
             }
+    }
+
+    fun githubLogin(view: View) {
+        val provider = OAuthProvider.newBuilder("github.com")
+
+        firebaseAuth!!
+            .startActivityForSignInWithProvider(this, provider.build())
+            .addOnSuccessListener(
+                OnSuccessListener<AuthResult?> {
+                    val profile = it?.getAdditionalUserInfo()?.getProfile()
+                    val name = profile?.get("name")
+                    Log.i(TAG, "Sucesso!, $profile")
+                    Toast.makeText(applicationContext, "Bem-vindo $name", Toast.LENGTH_SHORT).show()
+                    acessarDashboard()
+                })
+            .addOnFailureListener(
+                OnFailureListener {
+                    Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, it.toString())
+                })
     }
 }

@@ -37,4 +37,5 @@
     <string name="btn_login_github">Entrar com GitHub</string>
     <string name="repositorio">Repositório</string>
     <string name="branch">Branch</string>
+    <string name="cb_lembrar">Lembrar de mim</string>
 </resources>

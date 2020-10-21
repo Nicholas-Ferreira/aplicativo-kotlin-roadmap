@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken
 import java.net.URL
 
 open class api {
-    private val HOST = "https://us-central1-roadmap-4e592.cloudfunctions.net/app"
+    private val HOST = "https://us-central1-roadmap-4e592.cloudfunctions.net/roudmap"
 
     fun get(route: String): String {
         val url = "$HOST/$route"

@@ -3,6 +3,7 @@ package com.archeros.roadmap.service
 import android.content.Context
 import com.archeros.roadmap.entity.Branch
 import com.archeros.roadmap.entity.Repositorio
+import com.archeros.roadmap.util.Network.isInternetAvailable
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

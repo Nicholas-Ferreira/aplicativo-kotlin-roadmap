@@ -17,9 +17,9 @@ import com.archeros.roadmap.R
 import com.archeros.roadmap.adapter.RepositoriosAdapter
 import com.archeros.roadmap.entity.Repositorio
 import com.archeros.roadmap.service.RepositorioService
+import com.archeros.roadmap.util.Network
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.drawer_header.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class DashboardActivity : NavigationDrawer() {
@@ -39,7 +39,7 @@ class DashboardActivity : NavigationDrawer() {
         supportActionBar?.title = getString(R.string.title_dashboard)
         firebaseAuth = FirebaseAuth.getInstance();
 
-
+        Network.isInternetAvailable()
         //btnEssencial.setOnClickListener { openBranchActivity("Essencial") }
         //btnFrontend.setOnClickListener { openBranchActivity("Front-End") }
         //btnBackend.setOnClickListener { openBranchActivity("Back-End") }
@@ -74,7 +74,7 @@ class DashboardActivity : NavigationDrawer() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_atualizar -> this.onLoading()
+            R.id.action_atualizar -> this.getRepositorios()
             R.id.action_config -> {
                 var intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
@@ -82,15 +82,6 @@ class DashboardActivity : NavigationDrawer() {
             R.id.action_sair -> logoutApplication()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    fun onLoading() {
-        if(progressBar.visibility == View.VISIBLE) return
-        progressBar.visibility = View.VISIBLE
-        Thread(Runnable {
-            Thread.sleep(10000)
-            progressBar.visibility = View.INVISIBLE
-        }).start()
     }
 
     fun openRepositorioActivity(repositorio: Repositorio) {
@@ -128,7 +119,7 @@ class DashboardActivity : NavigationDrawer() {
 
     fun logoutApplication() {
         FirebaseAuth.getInstance().signOut();
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         this.finish()
     }
