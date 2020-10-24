@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "222944171635",
+    "firebase_url": "https://roadmap-4e592.firebaseio.com",
+    "project_id": "roadmap-4e592",
+    "storage_bucket": "roadmap-4e592.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222944171635:android:7a08176ac517a42ad4bc06",
+        "android_client_info": {
+          "package_name": "com.archeros.roadmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222944171635-7icieh6oik1eishm02hvtj9v9kvkbcf9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0Pmb5UKXHzWqT4p98MCheLi0dkdUB0uE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222944171635-7icieh6oik1eishm02hvtj9v9kvkbcf9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

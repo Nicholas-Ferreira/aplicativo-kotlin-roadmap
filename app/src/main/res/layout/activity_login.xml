@@ -64,9 +64,11 @@
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
             android:stateListAnimator="@null"
             android:text="@string/btn_login"
-            android:background="@color/colorButton"/>
+            android:background="@color/colorButtonDark"
+            android:textAllCaps="false"/>
 
         <ProgressBar
             android:id="@+id/btnLoginLoading"
@@ -76,5 +78,17 @@
             android:visibility="invisible" />
 
     </FrameLayout>
+
+    <Button
+        android:id="@+id/btnLoginGithub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButtonDark"
+        android:drawablePadding="-8dp"
+        android:drawableStart="@drawable/ic_github"
+        android:padding="8dp"
+        android:text="@string/btn_login_github"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

@@ -26,8 +26,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="15dp">
+            android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RecyclerViewRepositorios"
@@ -35,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical"
                 android:scrollbarStyle="outsideOverlay"
+                android:padding="15dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/adapter_repositorio"
                 />

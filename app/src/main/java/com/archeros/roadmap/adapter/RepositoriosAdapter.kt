@@ -10,9 +10,11 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.archeros.roadmap.R
 import com.archeros.roadmap.entity.Repositorio
+import com.archeros.roadmap.util.RoundedCornersTransform
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.Transformation
 
-class RepositoriosAdapter (
+class RepositoriosAdapter(
     val repositorios: List<Repositorio>,
     val onClick: (Repositorio) -> Unit
 ): RecyclerView.Adapter<RepositoriosAdapter.RepositoriosViewHolder>() {
@@ -45,12 +47,13 @@ class RepositoriosAdapter (
         val repositorio = repositorios[position]
 
         // atualizar dados de disciplina
-        holder.nome.text = repositorio.nome
+        holder.nome.text = repositorio.name
         holder.loader.visibility = View.VISIBLE
 
         // download da imagem
-        Picasso.with(context).load(repositorio.foto).fit().into(holder.image,
-            object: com.squareup.picasso.Callback{
+        Picasso.with(context).load(repositorio.photo).transform(RoundedCornersTransform()).fit().into(
+            holder.image,
+            object : com.squareup.picasso.Callback {
                 override fun onSuccess() {
                     holder.loader.visibility = View.GONE
                 }

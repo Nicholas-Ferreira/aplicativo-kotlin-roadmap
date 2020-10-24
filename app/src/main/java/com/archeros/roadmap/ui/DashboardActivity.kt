@@ -17,12 +17,16 @@ import com.archeros.roadmap.R
 import com.archeros.roadmap.adapter.RepositoriosAdapter
 import com.archeros.roadmap.entity.Repositorio
 import com.archeros.roadmap.service.RepositorioService
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.drawer_header.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class DashboardActivity : NavigationDrawer() {
+    private val TAG = "Dashboard"
     private val context: Context get() = this
     private var repositios = listOf<Repositorio>()
+    private var firebaseAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +37,8 @@ class DashboardActivity : NavigationDrawer() {
         RecyclerViewRepositorios?.itemAnimator = DefaultItemAnimator()
         RecyclerViewRepositorios?.setHasFixedSize(true)
         supportActionBar?.title = getString(R.string.title_dashboard)
+        firebaseAuth = FirebaseAuth.getInstance();
+
 
         //btnEssencial.setOnClickListener { openBranchActivity("Essencial") }
         //btnFrontend.setOnClickListener { openBranchActivity("Front-End") }
@@ -42,7 +48,7 @@ class DashboardActivity : NavigationDrawer() {
 
     override fun onResume() {
         super.onResume()
-        this.taskRepositorios()
+        this.getRepositorios()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -73,11 +79,7 @@ class DashboardActivity : NavigationDrawer() {
                 var intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
             }
-            R.id.action_sair -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                this.finish()
-            }
+            R.id.action_sair -> logoutApplication()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -92,7 +94,6 @@ class DashboardActivity : NavigationDrawer() {
     }
 
     fun openRepositorioActivity(repositorio: Repositorio) {
-        Toast.makeText(context, "Clicou repositrio ${repositorio.nome}", Toast.LENGTH_SHORT).show()
         var intent = Intent(this, RepositorioActivity::class.java)
         intent.putExtra("repositorio", repositorio)
         startActivity(intent)
@@ -100,15 +101,29 @@ class DashboardActivity : NavigationDrawer() {
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
-            R.id.nav_roadmap -> null
-            R.id.nav_favoritos -> null
+            R.id.nav_roadmap -> getRepositorios()
+            R.id.nav_favoritos -> getFavoritos()
+            R.id.nav_sair -> logoutApplication()
         }
         drawer_dashboard.closeDrawer(GravityCompat.START)
         return true
     }
 
-    fun taskRepositorios() {
+    fun getRepositorios() {
+        supportActionBar?.title = getString(R.string.title_dashboard)
         this.repositios = RepositorioService.getDisciplinas(context)
         RecyclerViewRepositorios?.adapter = RepositoriosAdapter(repositios) {openRepositorioActivity(it)}
+    }
+
+    fun getFavoritos() {
+        supportActionBar?.title = "Favoritos"
+        RecyclerViewRepositorios?.adapter = null
+    }
+
+    fun logoutApplication() {
+        FirebaseAuth.getInstance().signOut();
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        this.finish()
     }
 }

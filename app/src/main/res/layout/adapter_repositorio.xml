@@ -12,39 +12,44 @@
     app:cardUseCompatPadding="false"
     card_view:cardCornerRadius="2dp"
     card_view:cardElevation="6dp"
+    app:cardBackgroundColor="@color/colorButtonDark"
     android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/cardTvNome"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:textSize="20sp"
-            android:text="nome"/>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:padding="6dp">
             <ImageView
                 android:id="@+id/cardIvImagem"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="6dp"/>
+                android:layout_marginTop="6dp"
+                android:contentDescription="@string/repositorio"
+                />
 
             <ProgressBar
                 android:id="@+id/cardPgLoader"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 style="@android:style/Widget.ProgressBar.Small"
                 android:layout_gravity="center|center_vertical"
-                android:layout_marginRight="6dp"
+                android:layout_marginEnd="6dp"
                 android:visibility="invisible"/>
-
         </FrameLayout>
+
+        <TextView
+            android:id="@+id/cardTvNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/repositorio"
+            android:textSize="20sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

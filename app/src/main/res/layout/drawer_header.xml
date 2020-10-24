@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:background="@mipmap/drawer_backgroud"
+    android:background="@color/colorButtonDark"
     android:layout_gravity="bottom"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:padding="16dp"
@@ -18,9 +18,10 @@
         android:layout_marginTop="16dp"/>
     
     <TextView
+        android:id="@+id/drawer_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nome usuário"
+        android:text="Web Developer Roadmap"
         android:layout_marginTop="16dp"/>
 
 </LinearLayout>
