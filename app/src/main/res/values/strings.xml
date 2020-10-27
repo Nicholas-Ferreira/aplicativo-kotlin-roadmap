@@ -6,7 +6,7 @@
     <string name="action_configuracao">Configuração</string>
     <string name="btn_login">Entrar</string>
     <string name="tv_senha">Senha</string>
-    <string name="tv_ra">RA</string>
+    <string name="tv_email">E-mail</string>
     <string name="iv_logo_imagem">Logo</string>
     <string name="action_sair">Sair</string>
     <string name="title_dashboard">Roadmap</string>
@@ -38,4 +38,7 @@
     <string name="repositorio">Repositório</string>
     <string name="branch">Branch</string>
     <string name="cb_lembrar">Lembrar de mim</string>
+    <string name="nao_possui_cadastro">Não possui cadastro?</string>
+    <string name="clique_aqui">Clique aqui!</string>
+    <string name="finalizar_cadastro">finalizar cadastro</string>
 </resources>

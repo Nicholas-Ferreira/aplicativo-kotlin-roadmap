@@ -9,6 +9,8 @@ import android.widget.Toast
 import com.archeros.roadmap.DebugActivity
 import com.archeros.roadmap.R
 import com.archeros.roadmap.core.MyPreferences
+import com.archeros.roadmap.entity.User
+import com.archeros.roadmap.service.UserService
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.json.responseJson
 import com.google.android.gms.tasks.OnFailureListener
@@ -16,7 +18,10 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.OAuthProvider
+import kotlinx.android.synthetic.main.activity_cadastro.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.btnCadastro
+import kotlinx.android.synthetic.main.activity_login.etEmail
 
 
 class LoginActivity : DebugActivity() {
@@ -28,44 +33,49 @@ class LoginActivity : DebugActivity() {
         setContentView(R.layout.activity_login)
         firebaseAuth = FirebaseAuth.getInstance();
 
-        etRA.setText(MyPreferences.getString("ra"))
+        etEmail.setText(MyPreferences.getString("email"))
         etPassword.setText(MyPreferences.getString("password"))
         cbRemember.isChecked = MyPreferences.getBoolean("remember")
 
         btnLogin.setOnClickListener {
-            val ra = etRA.text.toString()
+            val email = etEmail.text.toString()
             val password = etPassword.text.toString()
             val remember = cbRemember.isChecked
 
             btnLoginLoading.visibility = View.VISIBLE
             btnLogin.text = ""
-            verifyLogin(ra, password) {
-                btnLoginLoading.visibility = View.INVISIBLE
-                btnLogin.text = getString(R.string.btn_login)
 
-                if(it || (ra == "123" && password == "123")) {
-                    if(remember) {
-                        MyPreferences.setBoolean("remember", true)
-                        MyPreferences.setString("ra", ra)
-                        MyPreferences.setString("password", password)
+            Thread {
+                val user: User? = UserService.login(email, password)
+                runOnUiThread {
+                    btnLoginLoading.visibility = View.INVISIBLE
+                    btnLogin.text = getString(R.string.btn_login)
+
+                    if(user != null || (email == "123" && password == "123")){
+                        if(remember) {
+                            MyPreferences.setBoolean("remember", true)
+                            MyPreferences.setString("email", email)
+                            MyPreferences.setString("password", password)
+                        } else {
+                            MyPreferences.setBoolean("remember", false)
+                            MyPreferences.setString("email", "")
+                            MyPreferences.setString("password", "")
+                        }
+                        this.acessarDashboard()
                     } else {
-                        MyPreferences.setBoolean("remember", false)
-                        MyPreferences.setString("ra", "")
-                        MyPreferences.setString("password", "")
+                        Toast.makeText(
+                            applicationContext,
+                            "Usuário ou senha incorretos.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-
-                    this.acessarDashboard()
-                }else {
-                    Toast.makeText(
-                        applicationContext,
-                        "Usuário ou senha incorretos.",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
-            }
-        }
+            }.start()
 
+        }
         btnLoginGithub.setOnClickListener { githubLogin (it) }
+
+        btnCadastro.setOnClickListener { acessarCadastro(it) }
     }
 
     override fun onStart() {
@@ -86,20 +96,9 @@ class LoginActivity : DebugActivity() {
         this.finish()
     }
 
-    fun verifyLogin(ra: String, password: String, callback: (result: Boolean) -> Unit) {
-        val url = "https://account.impacta.edu.br/account/enter.php"
-        val params = listOf("desidentificacao" to ra, "dessenha" to password)
-
-        Fuel.post(url, params)
-            .responseJson { request, response, result ->
-                result.fold(success = { json ->
-                    callback(json.obj().get("success") == true)
-                    btnLoginLoading.visibility = View.INVISIBLE
-                }, failure = { error ->
-                    Toast.makeText(applicationContext, "Erro inesperado", Toast.LENGTH_SHORT).show()
-                    Log.i("RequestResult", error.toString())
-                })
-            }
+    fun acessarCadastro(view: View) {
+        val intent = Intent(this, CadastroActivity::class.java)
+        startActivity(intent)
     }
 
     fun githubLogin(view: View) {

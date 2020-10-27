@@ -14,4 +14,9 @@ open class api {
         val url = "$HOST/$route"
         return HttpHelper.get(url)
     }
+
+    fun post(route: String, body: String = "{}"): String {
+        val url = "$HOST/$route"
+        return HttpHelper.post(url, body)
+    }
 }
