@@ -1,5 +1,6 @@
 package com.archeros.roadmap.ui
 
+import android.app.Notification
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -15,10 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.archeros.roadmap.NavigationDrawer
 import com.archeros.roadmap.R
 import com.archeros.roadmap.adapter.RepositoriosAdapter
+import com.archeros.roadmap.core.MyFirebaseMessagingService
 import com.archeros.roadmap.entity.Repositorio
 import com.archeros.roadmap.service.RepositorioService
 import com.archeros.roadmap.util.Network
+import com.archeros.roadmap.util.NotificationUtil
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -33,17 +38,18 @@ class DashboardActivity : NavigationDrawer() {
         setContentView(R.layout.activity_dashboard)
         setSupportActionBar(toolbar_view)
         setConfigDrawer(drawer_dashboard)
+        MyFirebaseMessagingService()
         RecyclerViewRepositorios?.layoutManager = LinearLayoutManager(context)
         RecyclerViewRepositorios?.itemAnimator = DefaultItemAnimator()
         RecyclerViewRepositorios?.setHasFixedSize(true)
+        NotificationUtil.createChannel(this)
         supportActionBar?.title = getString(R.string.title_dashboard)
         firebaseAuth = FirebaseAuth.getInstance();
+    }
 
-        Network.isInternetAvailable()
-        //btnEssencial.setOnClickListener { openBranchActivity("Essencial") }
-        //btnFrontend.setOnClickListener { openBranchActivity("Front-End") }
-        //btnBackend.setOnClickListener { openBranchActivity("Back-End") }
-        //btnDevops.setOnClickListener { openBranchActivity("DevOps") }
+    fun enviaNotificacao() {
+        val intent = Intent(this, DashboardActivity::class.java)
+        NotificationUtil.create(this, 1, intent, "LMSApp", "Você tem nova atividade")
     }
 
     override fun onResume() {
@@ -115,6 +121,9 @@ class DashboardActivity : NavigationDrawer() {
     fun getFavoritos() {
         supportActionBar?.title = "Favoritos"
         RecyclerViewRepositorios?.adapter = null
+
+        val intent = Intent(this, DashboardActivity::class.java)
+        NotificationUtil.create(this, 1, intent, "Roudmap", "Você tem nova atividade")
     }
 
     fun logoutApplication() {

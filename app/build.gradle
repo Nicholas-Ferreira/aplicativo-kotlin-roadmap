@@ -53,10 +53,13 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
     // Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.3.2'
     implementation 'com.google.firebase:firebase-auth:19.3.1'
 
     // Google Room - Banco de dados
     implementation "androidx.room:room-runtime:2.2.3"
+
     kapt "androidx.room:room-compiler:2.2.3"
 
     testImplementation 'junit:junit:4.12'
