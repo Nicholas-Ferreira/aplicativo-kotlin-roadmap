@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import com.archeros.roadmap.DebugActivity
 import com.archeros.roadmap.R
 import com.archeros.roadmap.adapter.BranchAdapter
 import com.archeros.roadmap.adapter.RepositoriosAdapter
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_repositorio.*
 import kotlinx.android.synthetic.main.toolbar.*
 
-class RepositorioActivity : AppCompatActivity() {
+class RepositorioActivity : DebugActivity() {
     private val context: Context get() = this
     private var branches = listOf<Branch>()
     private var repository: Repositorio? = null
@@ -34,13 +35,6 @@ class RepositorioActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home -> onBackPressed()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     fun getBranches() {

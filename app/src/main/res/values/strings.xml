@@ -41,4 +41,5 @@
     <string name="nao_possui_cadastro">Não possui cadastro?</string>
     <string name="clique_aqui">Clique aqui!</string>
     <string name="finalizar_cadastro">finalizar cadastro</string>
+    <string name="nav_eventos">Eventos</string>
 </resources>

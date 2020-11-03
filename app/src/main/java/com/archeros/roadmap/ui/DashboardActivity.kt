@@ -100,6 +100,7 @@ class DashboardActivity : NavigationDrawer() {
         when (item.itemId){
             R.id.nav_roadmap -> getRepositorios()
             R.id.nav_favoritos -> getFavoritos()
+            R.id.nav_eventos -> redirectToEventos()
             R.id.nav_sair -> logoutApplication()
         }
         drawer_dashboard.closeDrawer(GravityCompat.START)
@@ -124,6 +125,11 @@ class DashboardActivity : NavigationDrawer() {
 
         val intent = Intent(this, DashboardActivity::class.java)
         NotificationUtil.create(this, 1, intent, "Roudmap", "Você tem nova atividade")
+    }
+
+    fun redirectToEventos(){
+        var intent = Intent(this, MapsActivity::class.java)
+        startActivity(intent)
     }
 
     fun logoutApplication() {
