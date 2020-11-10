@@ -45,6 +45,7 @@ class DashboardActivity : NavigationDrawer() {
         NotificationUtil.createChannel(this)
         supportActionBar?.title = getString(R.string.title_dashboard)
         firebaseAuth = FirebaseAuth.getInstance();
+        enviaNotificacao()
     }
 
     fun enviaNotificacao() {
