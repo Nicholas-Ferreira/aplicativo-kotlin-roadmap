@@ -1,5 +1,6 @@
 package com.archeros.roadmap.ui
 
+import android.app.Notification
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -15,11 +16,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.archeros.roadmap.NavigationDrawer
 import com.archeros.roadmap.R
 import com.archeros.roadmap.adapter.RepositoriosAdapter
+import com.archeros.roadmap.core.MyFirebaseMessagingService
 import com.archeros.roadmap.entity.Repositorio
 import com.archeros.roadmap.service.RepositorioService
+import com.archeros.roadmap.util.Network
+import com.archeros.roadmap.util.NotificationUtil
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.drawer_header.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class DashboardActivity : NavigationDrawer() {
@@ -33,17 +38,19 @@ class DashboardActivity : NavigationDrawer() {
         setContentView(R.layout.activity_dashboard)
         setSupportActionBar(toolbar_view)
         setConfigDrawer(drawer_dashboard)
+        MyFirebaseMessagingService()
         RecyclerViewRepositorios?.layoutManager = LinearLayoutManager(context)
         RecyclerViewRepositorios?.itemAnimator = DefaultItemAnimator()
         RecyclerViewRepositorios?.setHasFixedSize(true)
+        NotificationUtil.createChannel(this)
         supportActionBar?.title = getString(R.string.title_dashboard)
         firebaseAuth = FirebaseAuth.getInstance();
+        enviaNotificacao()
+    }
 
-
-        //btnEssencial.setOnClickListener { openBranchActivity("Essencial") }
-        //btnFrontend.setOnClickListener { openBranchActivity("Front-End") }
-        //btnBackend.setOnClickListener { openBranchActivity("Back-End") }
-        //btnDevops.setOnClickListener { openBranchActivity("DevOps") }
+    fun enviaNotificacao() {
+        val intent = Intent(this, DashboardActivity::class.java)
+        NotificationUtil.create(this, 1, intent, "LMSApp", "Você tem nova atividade")
     }
 
     override fun onResume() {
@@ -74,7 +81,7 @@ class DashboardActivity : NavigationDrawer() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_atualizar -> this.onLoading()
+            R.id.action_atualizar -> this.getRepositorios()
             R.id.action_config -> {
                 var intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
@@ -82,15 +89,6 @@ class DashboardActivity : NavigationDrawer() {
             R.id.action_sair -> logoutApplication()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    fun onLoading() {
-        if(progressBar.visibility == View.VISIBLE) return
-        progressBar.visibility = View.VISIBLE
-        Thread(Runnable {
-            Thread.sleep(10000)
-            progressBar.visibility = View.INVISIBLE
-        }).start()
     }
 
     fun openRepositorioActivity(repositorio: Repositorio) {
@@ -103,6 +101,7 @@ class DashboardActivity : NavigationDrawer() {
         when (item.itemId){
             R.id.nav_roadmap -> getRepositorios()
             R.id.nav_favoritos -> getFavoritos()
+            R.id.nav_eventos -> redirectToEventos()
             R.id.nav_sair -> logoutApplication()
         }
         drawer_dashboard.closeDrawer(GravityCompat.START)
@@ -111,18 +110,32 @@ class DashboardActivity : NavigationDrawer() {
 
     fun getRepositorios() {
         supportActionBar?.title = getString(R.string.title_dashboard)
-        this.repositios = RepositorioService.getDisciplinas(context)
-        RecyclerViewRepositorios?.adapter = RepositoriosAdapter(repositios) {openRepositorioActivity(it)}
+        progressBar.visibility = View.VISIBLE
+        Thread {
+            this.repositios = RepositorioService.getRepositories()
+            runOnUiThread {
+                RecyclerViewRepositorios?.adapter = RepositoriosAdapter(repositios) {openRepositorioActivity(it)}
+                progressBar.visibility = View.INVISIBLE
+            }
+        }.start()
     }
 
     fun getFavoritos() {
         supportActionBar?.title = "Favoritos"
         RecyclerViewRepositorios?.adapter = null
+
+        val intent = Intent(this, DashboardActivity::class.java)
+        NotificationUtil.create(this, 1, intent, "Roudmap", "Você tem nova atividade")
+    }
+
+    fun redirectToEventos(){
+        var intent = Intent(this, MapsActivity::class.java)
+        startActivity(intent)
     }
 
     fun logoutApplication() {
         FirebaseAuth.getInstance().signOut();
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         this.finish()
     }

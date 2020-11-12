@@ -3,6 +3,7 @@ package com.archeros.roadmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 
 open class DebugActivity : AppCompatActivity() {
     private val TAG = "DebugActivity"
@@ -40,5 +41,12 @@ open class DebugActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "$className onDestroy chamado")
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

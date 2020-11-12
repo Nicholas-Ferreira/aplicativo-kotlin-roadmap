@@ -18,12 +18,12 @@ class BranchAdapter(
     class BranchesViewHolder(view: View): RecyclerView.ViewHolder(view) {
         var card: CardView
         val nome: TextView
-        val checked: ImageView
+        val percent: TextView
 
         init {
             card = view.findViewById(R.id.cardBranch)
             nome = view.findViewById(R.id.cardBranchNome)
-            checked = view.findViewById(R.id.cardBranchChecked)
+            percent = view.findViewById(R.id.cardBranchPercent)
         }
     }
 
@@ -37,8 +37,10 @@ class BranchAdapter(
     override fun onBindViewHolder(holder: BranchesViewHolder, position: Int) {
         val context = holder.itemView.context
         val branch = branches[position]
+        val percent = branch.percent
 
         holder.nome.text = branch.name
+        holder.percent.text = "$percent%"
         holder.itemView.setOnClickListener { onClick(branch) }
     }
 

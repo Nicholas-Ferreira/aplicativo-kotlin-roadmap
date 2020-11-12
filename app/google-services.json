@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "222944171635-tsvdl4tc2mhb72r63fa1p7e06rsthju3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.archeros.roadmap",
+            "certificate_hash": "874aa4baeba36fb86848b4a589dac25987c90c06"
+          }
+        },
+        {
+          "client_id": "222944171635-hjscn0v8slspbsl8r5f32j13hfn6c5pf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.archeros.roadmap",
+            "certificate_hash": "4d48744dda42cc4504bcbf5bdaa9ef436fc25d77"
+          }
+        },
+        {
           "client_id": "222944171635-7icieh6oik1eishm02hvtj9v9kvkbcf9.apps.googleusercontent.com",
           "client_type": 3
         }
