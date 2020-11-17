@@ -8,12 +8,12 @@
 
     <ImageView
         android:id="@+id/imageViewLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_width="299dp"
+        android:layout_height="142dp"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/logo"
         android:layout_marginTop="40dp"
-        android:contentDescription="@string/iv_logo_imagem" />
+        android:contentDescription="@string/iv_logo_imagem"
+        app:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/textView"
@@ -22,7 +22,7 @@
         android:text="@string/mensagem_inicial"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:layout_marginVertical="30dp"/>
+        android:layout_marginVertical="10dp"/>
 
     <TextView
         android:layout_width="match_parent"

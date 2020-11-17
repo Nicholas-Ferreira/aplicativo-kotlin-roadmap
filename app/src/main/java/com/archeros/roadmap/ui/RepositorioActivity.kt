@@ -2,6 +2,7 @@ package com.archeros.roadmap.ui
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -47,6 +48,9 @@ class RepositorioActivity : DebugActivity() {
     }
 
     fun openLearnActivity(branch: Branch) {
-        Toast.makeText(this, "Em Breve", Toast.LENGTH_SHORT).show()
+        val url = "http://devfuria.com.br/git/tutorial-iniciando-git/"
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 }

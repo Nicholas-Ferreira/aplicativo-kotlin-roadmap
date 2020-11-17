@@ -32,20 +32,20 @@
             android:textSize="20sp" />
 
 
-        <TextView
-            android:id="@+id/cardBranchPercent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="0%"
-            android:textSize="20sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/cardBranchPercent"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="0%"-->
+<!--            android:textSize="20sp" />-->
 
-<!--        <ImageView-->
-<!--            android:id="@+id/cardBranchChecked"-->
-<!--            android:layout_width="25dp"-->
-<!--            android:layout_height="23dp"-->
-<!--            android:layout_weight="0"-->
-<!--            android:background="@drawable/ic_baseline_star_off"/>-->
+        <ImageView
+            android:id="@+id/cardBranchChecked"
+            android:layout_width="25dp"
+            android:layout_height="23dp"
+            android:layout_weight="0"
+            android:background="@drawable/ic_baseline_star_off"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
