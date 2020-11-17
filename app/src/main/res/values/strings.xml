@@ -3,7 +3,7 @@
     <string name="mensagem_inicial">Comece sua Jornada!</string>
     <string name="action_buscar">Buscar</string>
     <string name="action_atualizar">Atualizar</string>
-    <string name="action_configuracao">Configuração</string>
+    <string name="action_configuracao">Configurações</string>
     <string name="btn_login">Entrar</string>
     <string name="tv_senha">Senha</string>
     <string name="tv_email">E-mail</string>
@@ -40,6 +40,6 @@
     <string name="cb_lembrar">Lembrar de mim</string>
     <string name="nao_possui_cadastro">Não possui cadastro?</string>
     <string name="clique_aqui">Clique aqui!</string>
-    <string name="finalizar_cadastro">finalizar cadastro</string>
+    <string name="finalizar_cadastro">Finalizar cadastro</string>
     <string name="nav_eventos">Eventos</string>
 </resources>

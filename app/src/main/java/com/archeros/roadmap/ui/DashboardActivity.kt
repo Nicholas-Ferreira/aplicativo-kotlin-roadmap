@@ -125,7 +125,7 @@ class DashboardActivity : NavigationDrawer() {
         RecyclerViewRepositorios?.adapter = null
 
         val intent = Intent(this, DashboardActivity::class.java)
-        NotificationUtil.create(this, 1, intent, "Roudmap", "Você tem nova atividade")
+        NotificationUtil.create(this, 1, intent, "Roadmap", "Você tem nova atividade!")
     }
 
     fun redirectToEventos(){

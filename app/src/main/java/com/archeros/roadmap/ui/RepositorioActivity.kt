@@ -47,6 +47,6 @@ class RepositorioActivity : DebugActivity() {
     }
 
     fun openLearnActivity(branch: Branch) {
-        Toast.makeText(this, "Em Breve", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Em breve", Toast.LENGTH_SHORT).show()
     }
 }
